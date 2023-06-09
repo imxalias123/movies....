@@ -3,7 +3,7 @@ const sqlite3 = require("sqlite3");
 const { open } = require("sqlite");
 const path = require("path");
 const app = express();
-
+app.use(express.json());
 const dbPath = path.join(__dirname, "cricketTeam.db");
 let db = null;
 const initializeDBAndServer = async () => {
@@ -37,7 +37,7 @@ app.get("/players/", async (request, response) => {
 
   const players = await db.all(getPlayers);
   response.send(
-    players.map((eachplayer) => convertDbObjectToResponseObject(eachplayer))
+    players.map((eachPlayer) => convertDbObjectToResponseObject(eachPlayer))
   );
 });
 
